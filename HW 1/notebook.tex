@@ -1,0 +1,1012 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW1-F18-MIS382N}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \#
+
+MIS 382N: ADVANCED PREDICTIVE MODELING - MSBA
+
+\#
+
+Assignment 1
+
+\#\#
+
+Total points: 80
+
+\#\#
+
+Due: Tuesday, September 18 submitted via Canvas by 11:59 pm
+
+Your homework should be written in a \textbf{Jupyter notebook}. You may
+work in groups of two if you wish. Only one student per team needs to
+submit the assignment on Canvas. But be sure to include name and UTEID
+for both students. Homework groups will be created and managed through
+Canvas, so please do not arbitrarily change your homework group. If you
+do change, let the TA know.
+
+Also, please make sure your code runs and the graphics (and anything
+else) are displayed in your notebook before submitting. (\%matplotlib
+inline)
+
+    \section{Question 1: Challenges in Data Science (10
+pts)}\label{question-1-challenges-in-data-science-10-pts}
+
+Refer to the Domino guide under Modules -\/-\textgreater{} Additional
+Resources
+
+Section 2 describes 8 Challenges. You may have personally encountered or
+heard of somebody else who encountered some of these challenge. If so,
+please write 1-2 paragraphs on what situation was encountered and how it
+mapped into one the mentioned challenges. If not, think of a
+hypothetical case and do the same exercise.
+
+\subsubsection{Try to solve the right problem but have the wrong
+tools:}\label{try-to-solve-the-right-problem-but-have-the-wrong-tools}
+
+Couple of years ago, I was working on patients charts data to understand
+patient characteristics, prescribing behavior, physician perceptions and
+brand loyalty for different drugs in the Multiple Myeloma market. I
+wanted to run the random forest algorithm in R to better understand the
+important patient characteristics associated with different drug types.
+Our team had never worked on any advanced predictive models and hence it
+took me at least a week to convince my manager to try using it. Even
+after the approval from my manager the IT team refused to allow me the
+permission to install the random forest package in R, citing data
+security reasons. We eventually analyzed the data using traditional
+tools such as Excel and in-house analytics platform, which limited my
+analysis to the traditional insights. I believe concerns over data
+security and slow acceptance of advanced analytical and statistical
+tools such as R and Python by senior leadership is a major reasons for
+having limited tools and resources to analyze data.
+
+    \section{Question 2: Maximum likelihood estimate (10
+pts)}\label{question-2-maximum-likelihood-estimate-10-pts}
+
+Prove the statement on slide 3 of notes on MLR: "Then minimizing Mean
+Squared Error (MSE) on the training data (which you can do using OLS)
+yields the Maximum Likelihood Estimate (MLE) solution of the assumed
+generative model."
+
+\subsection{Answer}\label{answer}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+         \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+         \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Q2\PYZus{}1.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}15}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \section{Question 3: Collinearity Issues (5
+pts)}\label{question-3-collinearity-issues-5-pts}
+
+What is the ``collinearity'' issue encountered in MLR? Why is this a
+problem when you try to use MLR? Suggest one way of addressing this
+problem.
+
+    If the predictors (X's) in Multiple Linear Regression are correlated,
+..............
+
+Collinearity is a problem when Multiple Linear Regression because of the
+following 2 reasons:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Correlation between predictors affects the interpretability of
+  parameters (Beta - coefficients)
+\item
+  Dependencies between predictors increases the stadard error of the
+  parameters
+\end{enumerate}
+
+We can address this problem by either increasing the \# of data points,
+which will reduce the standard error for the parameter (coefficients) or
+by using new predictor variables which are less correlated.While adding
+new variables could make the mean squared error to reduce, the standard
+error of the parameters might increase.
+
+    \section{Question 4: Multiple Linear Regression in Python (20
+pts)}\label{question-4-multiple-linear-regression-in-python-20-pts}
+
+Use the following code to import the allstate-claims-severity dataset
+and linear models in python. The dataset is taken from
+https://www.kaggle.com/c/allstate-claims-severity I have removed the
+categorical variables to make it easier to run the models. Because of
+this, MAE (Mean absolute error) will be on higher end compared to other
+Kaggle entries. Please download the dataset "reduced\_train.csv" and use
+it.
+
+\subsection{Answer}\label{answer}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,} \PY{n}{mean\PYZus{}absolute\PYZus{}error}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         
+         \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{reduced\PYZus{}train.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{X} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{train\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  (2 pts) Print the shape (number of rows and columns) of the feature
+  matrix X, and print the first 5 rows.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Shape of X }
+         \PY{n+nb}{print} \PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Printing the first 5 rows}
+         \PY{n}{X}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(188318, 14)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:}       cont1     cont2     cont3     cont4     cont5     cont6     cont7  \textbackslash{}
+         0  0.726300  0.245921  0.187583  0.789639  0.310061  0.718367  0.335060   
+         1  0.330514  0.737068  0.592681  0.614134  0.885834  0.438917  0.436585   
+         2  0.261841  0.358319  0.484196  0.236924  0.397069  0.289648  0.315545   
+         3  0.321594  0.555782  0.527991  0.373816  0.422268  0.440945  0.391128   
+         4  0.273204  0.159990  0.527991  0.473202  0.704268  0.178193  0.247408   
+         
+              cont8    cont9   cont10    cont11    cont12    cont13    cont14  
+         0  0.30260  0.67135  0.83510  0.569745  0.594646  0.822493  0.714843  
+         1  0.60087  0.35127  0.43919  0.338312  0.366307  0.611431  0.304496  
+         2  0.27320  0.26076  0.32446  0.381398  0.373424  0.195709  0.774425  
+         3  0.31796  0.32128  0.44467  0.327915  0.321570  0.605077  0.602642  
+         4  0.24564  0.22089  0.21230  0.204687  0.202213  0.246011  0.432606  
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  (6 pts) Using ordinary least squares, fit a multiple linear regression
+  (MLR) on all the feature variables using the entire dataset. Report
+  the regression coefficient of each input feature and evaluate the
+  model using mean absolute error (MAE). Example of ordinary least
+  squares in Python is shown in Section 1.1.1 of
+  http://scikit-learn.org/stable/modules/linear\_model.html.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} Fitting multiple linear regression on all the features using the entire data set using OLS}
+         \PY{n}{reg} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{reg}\PY{o}{.}\PY{n}{fit} \PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Calculating regression coefficient for each input feature}
+         
+         \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{,}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PYZbs{}
+                    \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{reg}\PY{o}{.}\PY{n}{coef\PYZus{}} \PY{p}{,}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Regression\PYZus{}coefficients}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{axis} \PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:}    Features  Regression\_coefficients
+         0     cont1             -2137.111212
+         1     cont2              1762.240616
+         2     cont3               -56.579685
+         3     cont4              -301.172981
+         4     cont5                30.032018
+         5     cont6              -557.225099
+         6     cont7              1707.955206
+         7     cont8               298.612406
+         8     cont9              2049.379104
+         9    cont10              -250.019861
+         10   cont11             -1732.348874
+         11   cont12              2724.389858
+         12   cont13              -631.301289
+         13   cont14               273.626005
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{}Calculating the Mean Absolute Error}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Absolute Error of the Multiple Linear regression Model is :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{Y}\PY{p}{,}\PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Mean Absolute Error of the Linear regression Model is : 1950.3606265639835
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  (6 pts) Split the data into a training set and a test set, using the
+  train\_test\_split with test\_size = 0.30 and random\_state = 50. The
+  code for this is given below. Fit an MLR using the training set.
+  Evaluate the trained model using the training set and the test set,
+  respectively. Compare the two MAE values thus obtained.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}239}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y}\PY{p}{,}\PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.30}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+          \PY{n}{reg} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{reg}\PY{o}{.}\PY{n}{fit} \PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{Y\PYZus{}train}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Prediction on Training Data}
+          \PY{n}{prediction\PYZus{}train} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+          \PY{n}{MAE\PYZus{}train} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{Y\PYZus{}train}\PY{p}{,}\PY{n}{prediction\PYZus{}train}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Predicton on the Test Data }
+          \PY{n}{prediction\PYZus{}test} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          \PY{n}{MAE\PYZus{}test} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{Y\PYZus{}test}\PY{p}{,}\PY{n}{prediction\PYZus{}test}\PY{p}{)}
+          
+          
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Absolute Error from the trained data is :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{MAE\PYZus{}train}\PY{p}{)}
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Absolute Error from the test data is :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{MAE\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Mean Absolute Error from the trained data is : 1946.9866773014621
+Mean Absolute Error from the test data is : 1954.111059596165
+
+    \end{Verbatim}
+
+    The MAE obtained on the test data is slightly higher
+
+    \begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  (6 pts) Plot the histogram of Y\_train and see its distribution. Now
+  take log of Y\_train and plot its histogram. Now run regression again
+  after taking log and compare the MAE. You need to do
+  np.exp(predictions) to bring them back to original scale, and then
+  calculate MAE. Explain the results.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}198}]:} \PY{c+c1}{\PYZsh{} Plotting histograms for Y\PYZus{}train and log(Y\PYZus{}train)}
+          \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,}\PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharey} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{Y\PYZus{}train}\PY{p}{,}\PY{n}{hist} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{ax1}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{log}\PY{p}{(}\PY{n}{Y\PYZus{}train}\PY{p}{)}\PY{p}{,}\PY{n}{hist} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{ax2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}bandi\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+C:\textbackslash{}Users\textbackslash{}bandi\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}198}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1df86894b38>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}240}]:} \PY{n}{log\PYZus{}Y\PYZus{}train} \PY{o}{=} \PY{n}{log}\PY{p}{(}\PY{n}{Y\PYZus{}train}\PY{p}{)}
+          \PY{n}{reg}\PY{o}{.}\PY{n}{fit} \PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}
+          \PY{n}{prediction\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+          \PY{n}{MAE\PYZus{}test} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{Y\PYZus{}test}\PY{p}{,}\PY{n}{prediction\PYZus{}test}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}prediction\PYZus{}test}
+          
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The new MAE is :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{MAE\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The new MAE is : 1810.6519682594767
+
+    \end{Verbatim}
+
+    The MAE reduced after taking log (Y\_train), because Y\_train was not
+normally distributed. Hence it was violating the linear regression's
+assumption. Once we took log (Y\_train), the predictor became normally
+distributed, thus reducing the MAE.
+
+    \section{Question 5: Ridge and Lasso Regression (25
+points)}\label{question-5-ridge-and-lasso-regression-25-points}
+
+    Using the same data from before, in this question you will explore the
+application of Lasso and Ridge regression using sklearn package in
+Python. Split the data into a training set and a test set, using the
+train\_test\_split with test\_size = 0.30 and random\_state = 50. Take
+log of the Y\_train and use it for training.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Use sklearn.linear\_model.Lasso and sklearn.linear\_model.Ridge
+  classes to do a
+  \href{http://scikit-learn.org/stable/auto_examples/exercises/plot_cv_diabetes.html\#example-exercises-plot-cv-diabetes-py}{5-fold
+  cross validation} using sklearn's
+  \href{http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.KFold.html}{KFold}.
+  For the sweep of the regularization parameter, we will look at a grid
+  of values ranging from \(\lambda = 10^{10}\) to \(\lambda = 10^{-6}\).
+  In Python, you can consider this range of values as follows:
+
+  import numpy as np
+
+  alphas = 10**np.linspace(10,-6,100)*0.5
+\end{enumerate}
+
+Report the best chosen \(\lambda\) based on cross validation. The cross
+validation should happen on your training data using average MAE as the
+scoring metric. (8pts)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\item
+  Run ridge and lasso for all of the alphas specified above (on training
+  data), and plot the coefficients learned for each of them - there
+  should be one plot each for lasso and ridge, so a total of two plots;
+  the plots for different features for a method should be on the same
+  plot. What do you qualitatively observe when value of the
+  regularization parameter is changed? (7pts)
+\item
+  Run least squares regression, ridge, and lasso on the training data.
+  For ridge and lasso, use only the best regularization parameter.
+  Report the prediction error (MAE) on the test data for each. (5pts)
+\item
+  Run lasso again with cross validation using
+  \href{http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html}{sklearn.linear\_model.LassoCV}.
+  Set the cross validation parameters as follows:
+
+  LassoCV(alphas=None, cv=10, max\_iter=10000)
+\end{enumerate}
+
+Report the best \(\lambda\) based on cross validation. Run lasso on the
+training data using the best \(\lambda\) and report the coefficeints for
+all variables. (5pts)
+
+\subsection{Answer}\label{answer}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}235}]:} \PY{c+c1}{\PYZsh{} Lasso Regression}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{Lasso}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
+          
+          \PY{c+c1}{\PYZsh{} Setting the range for alpha and \PYZsh{} of k folds required}
+          \PY{n}{alphas} \PY{o}{=}  \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.5}
+          \PY{n}{kf} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{MAE\PYZus{}cv} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{n}{alphas}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Loop for 5 cross validations}
+          \PY{k}{for} \PY{n}{train\PYZus{}index}\PY{p}{,} \PY{n}{test\PYZus{}index} \PY{o+ow}{in} \PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{:}
+              \PY{n}{X\PYZus{}train\PYZus{}cv}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}cv} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{MAE} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{c+c1}{\PYZsh{} Loop for all the alphas (lambda)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{alphas}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{reg} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{alphas}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{reg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}cv}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+                  \PY{n}{prediction} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}cv}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{MAE}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{prediction}\PY{p}{)}\PY{p}{)}
+              \PY{n}{MAE\PYZus{}cv}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{MAE\PYZus{}cv}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{MAE}
+              
+          \PY{c+c1}{\PYZsh{} Calculating the minimum lambda based on the average MAE }
+          \PY{n}{lambda\PYZus{}min\PYZus{}lasso} \PY{o}{=} \PY{n}{MAE\PYZus{}cv}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis} \PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Plotting Avergae MAE against lambda}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{alphas}\PY{p}{,}\PY{n}{MAE\PYZus{}cv}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis} \PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lambda}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Mean Absolute Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Minimum lambda based on average MAE from Lasso Regression is :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lambda\PYZus{}min\PYZus{}lasso}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}bandi\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}coordinate\_descent.py:491: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Fitting data with very small alpha may cause precision problems.
+  ConvergenceWarning)
+C:\textbackslash{}Users\textbackslash{}bandi\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}coordinate\_descent.py:491: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Fitting data with very small alpha may cause precision problems.
+  ConvergenceWarning)
+C:\textbackslash{}Users\textbackslash{}bandi\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}coordinate\_descent.py:491: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Fitting data with very small alpha may cause precision problems.
+  ConvergenceWarning)
+C:\textbackslash{}Users\textbackslash{}bandi\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}coordinate\_descent.py:491: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Fitting data with very small alpha may cause precision problems.
+  ConvergenceWarning)
+C:\textbackslash{}Users\textbackslash{}bandi\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}coordinate\_descent.py:491: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Fitting data with very small alpha may cause precision problems.
+  ConvergenceWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Minimum lambda based on average MAE from Lasso Regression is : 0.01675801325469417
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}236}]:} \PY{c+c1}{\PYZsh{} Ridge Regression \PYZhy{} We will repeat the entire process for Ridge Regression }
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{Ridge}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
+          
+          \PY{c+c1}{\PYZsh{} Setting the rang for alpha and \PYZsh{} of k folds required}
+          \PY{n}{alphas} \PY{o}{=}  \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.5}
+          \PY{n}{kf} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{MAE\PYZus{}cv} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{n}{alphas}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Loop for 5 cross validations}
+          \PY{k}{for} \PY{n}{train\PYZus{}index}\PY{p}{,} \PY{n}{test\PYZus{}index} \PY{o+ow}{in} \PY{n}{kf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{:}
+              \PY{n}{X\PYZus{}train\PYZus{}cv}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}cv} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+              \PY{n}{MAE} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{c+c1}{\PYZsh{} Loop for all the alphas (lambda)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{alphas}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{reg} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Ridge}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{alphas}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{reg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}cv}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+                  \PY{n}{prediction} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}cv}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{MAE}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{prediction}\PY{p}{)}\PY{p}{)}
+              \PY{n}{MAE\PYZus{}cv}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{MAE\PYZus{}cv}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{MAE}
+              
+          \PY{c+c1}{\PYZsh{} Calculating the minimum lambda based on the average MAE }
+          \PY{n}{lambda\PYZus{}min\PYZus{}ridge} \PY{o}{=} \PY{n}{MAE\PYZus{}cv}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis} \PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Plotting Avergae MAE against lambda}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{alphas}\PY{p}{,}\PY{n}{MAE\PYZus{}cv}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis} \PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lambda}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Mean Absolute Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Minimum lambda based on average MAE from Ridge Regression is :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lambda\PYZus{}min\PYZus{}ridge}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Minimum lambda based on average MAE from Ridge Regression is : 27311386.088421684
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}229}]:} \PY{c+c1}{\PYZsh{} Running Lasso Regression for all the alpha values}
+          \PY{n}{alphas} \PY{o}{=}  \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.5}
+          \PY{n}{coefs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{alphas}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{reg\PYZus{}lasso} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{alphas}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{reg\PYZus{}lasso}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}
+                  \PY{n}{prediction} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{reg\PYZus{}lasso}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{coefs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{reg\PYZus{}lasso}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}bandi\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}coordinate\_descent.py:491: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations. Fitting data with very small alpha may cause precision problems.
+  ConvergenceWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}232}]:} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{alphas}\PY{p}{,} \PY{n}{coefs}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log lambda}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Coefficients}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lasso coefficients as a function of regularization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}232}]:} Text(0.5,1,'Lasso Coefficients as a function of regularization')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}234}]:} \PY{c+c1}{\PYZsh{} Running Lasso Regression for all the alpha values}
+          \PY{n}{alphas} \PY{o}{=}  \PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.5}
+          \PY{n}{coefs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{alphas}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{reg\PYZus{}ridge} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Ridge}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{alphas}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{reg\PYZus{}ridge}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}
+                  \PY{n}{prediction} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{reg\PYZus{}ridge}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{coefs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{reg\PYZus{}ridge}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}
+                  
+          \PY{c+c1}{\PYZsh{} Plot ridge coefficients asa function of lambda}
+          \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{alphas}\PY{p}{,} \PY{n}{coefs}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log lambda}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Coefficients}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ridge coefficients as a function of regularization}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}234}]:} Text(0.5,1,'Ridge coefficients as a function of regularization')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Overall as we increase the value of regularization term (lambda), the
+coefficents become closer to zero.
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Run least squares regression, ridge, and lasso on the training data.
+  For ridge and lasso, use only the best regularization parameter.
+  Report the prediction error (MAE) on the test data for each. (5pts)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}246}]:} \PY{c+c1}{\PYZsh{} Least Square Regression}
+          \PY{n}{reg} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{reg}\PY{o}{.}\PY{n}{fit} \PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}
+          \PY{n}{prediction\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+          \PY{n}{MAE\PYZus{}test} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{Y\PYZus{}test}\PY{p}{,}\PY{n}{prediction\PYZus{}test}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Lasso Regression}
+          \PY{n}{reg\PYZus{}lasso} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{lambda\PYZus{}min\PYZus{}lasso}\PY{p}{)}
+          \PY{n}{reg\PYZus{}lasso}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}
+          \PY{n}{prediction\PYZus{}lasso} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{reg\PYZus{}lasso}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+          \PY{n}{MAE\PYZus{}test\PYZus{}lasso} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{Y\PYZus{}test}\PY{p}{,}\PY{n}{prediction\PYZus{}lasso}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Ridge Regression}
+          \PY{n}{reg\PYZus{}ridge} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Ridge}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{lambda\PYZus{}min\PYZus{}ridge}\PY{p}{)}
+          \PY{n}{reg\PYZus{}ridge}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}
+          \PY{n}{prediction\PYZus{}ridge} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{reg\PYZus{}ridge}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{)}
+          \PY{n}{MAE\PYZus{}test\PYZus{}ridge} \PY{o}{=} \PY{n}{mean\PYZus{}absolute\PYZus{}error}\PY{p}{(}\PY{n}{Y\PYZus{}test}\PY{p}{,}\PY{n}{prediction\PYZus{}ridge}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MAE for least square regression is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{MAE\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MAE for lasso regression is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{MAE\PYZus{}test\PYZus{}lasso}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MAE for ridge regression is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{MAE\PYZus{}test\PYZus{}ridge}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+MAE for least square regression is: 1810.6519682594767
+MAE for lasso regression is: 1818.4224556783959
+MAE for ridge regression is: 1818.8227140091647
+
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{3}
+\item
+  Run lasso again with cross validation using
+  \href{http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html}{sklearn.linear\_model.LassoCV}.
+  Set the cross validation parameters as follows:
+
+  LassoCV(alphas=None, cv=10, max\_iter=10000)
+\end{enumerate}
+
+Report the best \(\lambda\) based on cross validation. Run lasso on the
+training data using the best \(\lambda\) and report the coefficeints for
+all variables. (5pts)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}247}]:} \PY{c+c1}{\PYZsh{} Running Lasso with cross validation }
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LassoCV}
+          \PY{n}{lasso\PYZus{}cv} \PY{o}{=} \PY{n}{LassoCV}\PY{p}{(}\PY{n}{alphas}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}
+          \PY{n}{lasso\PYZus{}cv}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}247}]:} LassoCV(alphas=None, copy\_X=True, cv=10, eps=0.001, fit\_intercept=True,
+              max\_iter=10000, n\_alphas=100, n\_jobs=1, normalize=False,
+              positive=False, precompute='auto', random\_state=None,
+              selection='cyclic', tol=0.0001, verbose=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}275}]:} \PY{n}{mse} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{lasso\PYZus{}cv}\PY{o}{.}\PY{n}{mse\PYZus{}path\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{avg\PYZus{}mse} \PY{o}{=} \PY{n}{lasso\PYZus{}cv}\PY{o}{.}\PY{n}{mse\PYZus{}path\PYZus{}}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+              \PY{n}{mse}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{avg\PYZus{}mse}\PY{p}{)}
+              
+          \PY{c+c1}{\PYZsh{} Calculate the lambda which minimizes mean squared error}
+          \PY{n}{min\PYZus{}lambda\PYZus{}lasso\PYZus{}cv} \PY{o}{=} \PY{n}{lasso\PYZus{}cv}\PY{o}{.}\PY{n}{alphas\PYZus{}}\PY{p}{[}\PY{n}{mse}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{mse}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Run the lasso regression on the minimum lambda}
+          \PY{n}{reg\PYZus{}lasso} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Lasso}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{min\PYZus{}lambda\PYZus{}lasso\PYZus{}cv}\PY{p}{)}
+          \PY{n}{reg\PYZus{}lasso}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{log\PYZus{}Y\PYZus{}train}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Calculate the coefficients for all the variables}
+          \PY{n}{reg\PYZus{}lasso}\PY{o}{.}\PY{n}{coef\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}275}]:} array([-0.51711206,  0.35693216,  0.01261526, -0.08068485, -0.00950437,
+                 -0.06881325,  0.30609698,  0.08840324,  0.57216477, -0.16869083,
+                 -0.35348216,  0.55420528, -0.09951851,  0.09436384])
+\end{Verbatim}
+            
+    \section{Question 6 (10pts)}\label{question-6-10pts}
+
+Please solve problem \#3.3 on page 174 in Bishop (Chapter 3). The
+problem has been uploaded to Canvas under 'Files': \textbf{CH3 problems
+from Bishop PRML.pdf}.
+
+\subsection{Answer}\label{answer}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Q6\PYZus{}1.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}12}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Q6\PYZus{}2.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}13}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    Explanation:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  It might sometimes be important to strongly predict the response for
+  certain values of inputs (maybe the ones which we might see often or
+  maybe the ones where mistakes could be very costly). Thus if we give
+  these values more weights and points elesewhere lesser weights, the
+  regression will be pulled towards matching the data near those points.
+\item
+  \textbf{\emph{Data dependent noise variance}}: While linear regression
+  assumes that noise in the data has constant variance, it is usually
+  not correct in real data sets.If we know the noise variance of each
+  measurement in the data set, we can set our weights in such a way
+  which can minimize this variance.
+\item
+  \textbf{\emph{Replicated data points}}: It might be possible that some
+  of the data points are over-sampled or have a high probability of
+  including, while otherse could be under-sAmpled or have a low
+  probability of including in the sample. We can then weight the data
+  points in an inverse proportion to their probability of inclusion.
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
